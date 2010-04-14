@@ -1,4 +1,4 @@
-class JRailsGenerator < Rails::Generator::Base
+class JrailsGenerator < Rails::Generator::Base
   def manifest
     record do |m|
       m.file 'config/jrails.yml'               , 'config/jrails.yml'
