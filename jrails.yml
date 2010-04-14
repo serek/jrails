@@ -1,0 +1,6 @@
+development:
+  google: false
+
+production:
+  google: true
+

@@ -1,3 +1,40 @@
+class JRails
+  @@config = {:google => false, :jquery_version => "1.4.2", :jqueryui_version => "1.8"}
+
+  def self.load_config
+    config_file = "#{RAILS_ROOT}/config/jrails.yml"
+    @@config.merge!(YAML.load_file(config_file)[RAILS_ENV].symbolize_keys()) if File.exist? config_file
+  end
+
+  def self.config
+    @@config
+  end
+
+  def self.google?
+    @@config[:google]
+  end
+
+  def self.jquery_path
+    case @@config[:google]
+    when true
+      "http://ajax.googleapis.com/ajax/libs/jquery/#{@@config[:jquery_version]}/jquery.min.js"
+    else
+      "jquery"
+    end
+  end
+
+  def self.jqueryui_path
+    case @@config[:google]
+    when true
+      "http://ajax.googleapis.com/ajax/libs/jqueryui/#{@@config[:jqueryui_version]}/jquery-ui.min.js"
+    else
+      "jqueryui"
+    end
+  end
+end
+
+
+
 module ActionView
   module Helpers
     
