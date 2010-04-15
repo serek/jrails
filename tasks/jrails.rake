@@ -1,7 +1,7 @@
 namespace :jrails do
 
 	namespace :js do
-		desc "Copies the jQuery and jRails javascripts to public/javascripts"
+		desc "deprecated. Please use ./script/generator jrails"
 		task :install do
 			#puts "Copying files..."
 			#project_dir = RAILS_ROOT + '/public/javascripts/'
