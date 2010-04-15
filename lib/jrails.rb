@@ -1,5 +1,10 @@
 class JRails
-  @@config = {:google => false, :jquery_version => "1.4.2", :jqueryui_version => "1.8"}
+  @@config = {
+    :google           => false,
+    :jquery_version   => "1.4.2",
+    :jqueryui_version => "1.8",
+    :compressed       => true
+  }
 
   def self.load_config
     config_file = File.join(RAILS_ROOT, "config", "jrails.yml")
@@ -7,37 +12,21 @@ class JRails
       loaded_config = YAML.load_file(config_file) 
       if loaded_config and loaded_config.key? RAILS_ENV
         @@config.merge!(loaded_config[RAILS_ENV].symbolize_keys) 
+        if google?
+          @@jquery_path   = "http://ajax.googleapis.com/ajax/libs/jquery/#{@@config[:jquery_version]}/jquery#{".min" if compressed?}.js"
+          @@jqueryui_path = "http://ajax.googleapis.com/ajax/libs/jqueryui/#{@@config[:jqueryui_version]}/jquery-ui#{".min" if compressed?}.js"
+        end
       else
         raise Exception.new "Failed finding '#{RAILS_ENV}' environment in config. check your 'config/jrails.yml' or delete that file "
       end
     end
   end
 
-  def self.config
-    @@config
-  end
-
-  def self.google?
-    @@config[:google]
-  end
-
-  def self.jquery_path
-    case @@config[:google]
-    when true
-      "http://ajax.googleapis.com/ajax/libs/jquery/#{@@config[:jquery_version]}/jquery.min.js"
-    else
-      "jquery"
-    end
-  end
-
-  def self.jqueryui_path
-    case @@config[:google]
-    when true
-      "http://ajax.googleapis.com/ajax/libs/jqueryui/#{@@config[:jqueryui_version]}/jquery-ui.min.js"
-    else
-      "jqueryui"
-    end
-  end
+  def self.config        ; @@config              ; end
+  def self.google?       ; @@config[:google]     ; end
+  def self.compressed?   ; @@config[:compressed] ; end
+  def self.jquery_path   ; @@jquery_path         ; end
+  def self.jqueryui_path ; @@jqueryui_path       ; end
 end
 
 
