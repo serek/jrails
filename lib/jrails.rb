@@ -2,8 +2,15 @@ class JRails
   @@config = {:google => false, :jquery_version => "1.4.2", :jqueryui_version => "1.8"}
 
   def self.load_config
-    config_file = "#{RAILS_ROOT}/config/jrails.yml"
-    @@config.merge!(YAML.load_file(config_file)[RAILS_ENV].try(:symbolize_keys)) if File.exist? config_file
+    config_file = File.join(RAILS_ROOT, "config", "jrails.yml")
+    if File.exist? config_file
+      loaded_config = YAML.load_file(config_file) 
+      if loaded_config.key? RAILS_ENV
+        @@config.merge!([RAILS_ENV].try(:symbolize_keys)) 
+      else
+        raise Exception.new "Failed finding '#{RAILS_ENV}' environment in config. check your 'config/jrails.yml' "
+      end
+    end
   end
 
   def self.config
