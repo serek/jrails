@@ -6,7 +6,7 @@ class JRails
     if File.exist? config_file
       loaded_config = YAML.load_file(config_file) 
       if loaded_config and loaded_config.key? RAILS_ENV
-        @@config.merge!([RAILS_ENV].try(:symbolize_keys)) 
+        @@config.merge!(loaded_config[RAILS_ENV].symbolize_keys) 
       else
         raise Exception.new "Failed finding '#{RAILS_ENV}' environment in config. check your 'config/jrails.yml' or delete that file "
       end
