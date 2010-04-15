@@ -22,7 +22,7 @@ ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
 
 ActionView::Helpers::AssetTagHelper.module_eval do 
   def yield_authenticity_javascript
-<<JAVASCRIPT if protect_against_forgery?
+<<JAVASCRIPT
 <script type='text/javascript'>
  //<![CDATA[
    window._auth_token = '#{form_authenticity_token}';
