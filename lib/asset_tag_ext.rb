@@ -43,17 +43,19 @@ JAVASCRIPT
   end 
 
   def javascript_include_tag_with_jquery(*source)
-    javascripts = []
     if source.first == :defaults
+      javascripts = []
       if JRails.google?
         javascripts \
           << javascript_include_tag_without_jquery(JRails.jquery_path) \
           << javascript_include_tag_without_jquery(JRails.jqueryui_path) \
       end
-
+      javascripts << javascript_include_tag_without_jquery(*source)
       javascripts << yield_authenticity_javascript if protect_against_forgery?
+      javascripts.join("\n")
+    else
+      javascript_include_tag_without_jquery(*source)
     end
-    javascripts.join("\n") << javascript_include_tag_without_jquery(*source)
   end
   alias_method_chain :javascript_include_tag, :jquery
 end
