@@ -3,7 +3,7 @@ class JRails
 
   def self.load_config
     config_file = "#{RAILS_ROOT}/config/jrails.yml"
-    @@config.merge!(YAML.load_file(config_file)[RAILS_ENV].symbolize_keys()) if File.exist? config_file
+    @@config.merge!(YAML.load_file(config_file)[RAILS_ENV].try(:symbolize_keys)) if File.exist? config_file
   end
 
   def self.config
