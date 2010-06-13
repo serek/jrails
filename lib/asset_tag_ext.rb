@@ -43,6 +43,7 @@ JAVASCRIPT
         javascripts \
           << javascript_include_tag_without_jquery(JRails.jquery_path) \
           << javascript_include_tag_without_jquery(JRails.jqueryui_path) \
+          << javascript_include_tag_without_jquery(JRails.jqueryui_i18n_path) \
       end
       javascripts << javascript_include_tag_without_jquery(*source)
       javascripts << yield_authenticity_javascript if protect_against_forgery?
