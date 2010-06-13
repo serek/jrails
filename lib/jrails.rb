@@ -2,7 +2,7 @@ class JRails
   @@config = {
     :google           => false,
     :jquery_version   => "1.4.2",
-    :jqueryui_version => "1.8",
+    :jqueryui_version => "1.8.2",
     :compressed       => true
   }
 
@@ -66,7 +66,7 @@ module ActionView
       USE_PROTECTION = const_defined?(:DISABLE_JQUERY_FORGERY_PROTECTION) ? !DISABLE_JQUERY_FORGERY_PROTECTION : true
 
       unless const_defined? :JQUERY_VAR
-        JQUERY_VAR = 'jQuery'
+        JQUERY_VAR = '$'
       end
           
       unless const_defined? :JQCALLBACKS
