@@ -15,6 +15,7 @@ class JRails
         if google?
           @@jquery_path   = "http://ajax.googleapis.com/ajax/libs/jquery/#{@@config[:jquery_version]}/jquery#{".min" if compressed?}.js"
           @@jqueryui_path = "http://ajax.googleapis.com/ajax/libs/jqueryui/#{@@config[:jqueryui_version]}/jquery-ui#{".min" if compressed?}.js"
+          @@jqueryui_i18n_path = "http://ajax.googleapis.com/ajax/libs/jqueryui/#{@@config[:jqueryui_version]}/i18n/jquery-ui-i18n#{".min" if compressed?}.js"
         end
       else
         raise Exception.new "Failed finding '#{RAILS_ENV}' environment in config. check your 'config/jrails.yml' or delete that file "
@@ -27,6 +28,7 @@ class JRails
   def self.compressed?   ; @@config[:compressed] ; end
   def self.jquery_path   ; @@jquery_path         ; end
   def self.jqueryui_path ; @@jqueryui_path       ; end
+  def self.jqueryui_i18n_path ; @@jqueryui_i18n_path  ; end
 end
 
 

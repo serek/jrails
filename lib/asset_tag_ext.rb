@@ -9,7 +9,7 @@ JRails.load_config
 if JRails.google?
   ActionView::Helpers::AssetTagHelper::JAVASCRIPT_DEFAULT_SOURCES = ["jrails#{".min" if JRails.compressed?}"]
 else
-  ActionView::Helpers::AssetTagHelper::JAVASCRIPT_DEFAULT_SOURCES = ["jquery#{".min" if JRails.compressed?}","jquery-ui#{".min" if JRails.compressed?}","jrails#{".min" if JRails.compressed?}"]
+  ActionView::Helpers::AssetTagHelper::JAVASCRIPT_DEFAULT_SOURCES = ["jquery#{".min" if JRails.compressed?}","jquery-ui#{".min" if JRails.compressed?}","jquery-ui-i18n#{".min" if JRails.compressed?}","jrails#{".min" if JRails.compressed?}"]
 end
 ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
 
