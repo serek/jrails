@@ -7,11 +7,10 @@
 
 JRails.load_config
 if JRails.google?
-  ActionView::Helpers::AssetTagHelper::JAVASCRIPT_DEFAULT_SOURCES = ["jrails#{".min" if JRails.compressed?}"]
+  ActionView::Helpers::AssetTagHelper.register_javascript_expansion :jrails => ["jrails#{".min" if JRails.compressed?}"]
 else
-  ActionView::Helpers::AssetTagHelper::JAVASCRIPT_DEFAULT_SOURCES = ["jquery#{".min" if JRails.compressed?}","jquery-ui#{".min" if JRails.compressed?}","jquery-ui-i18n#{".min" if JRails.compressed?}","jrails#{".min" if JRails.compressed?}"]
+  ActionView::Helpers::AssetTagHelper.register_javascript_expansion :jrails => ["jquery#{".min" if JRails.compressed?}","jquery-ui#{".min" if JRails.compressed?}","jquery-ui-i18n#{".min" if JRails.compressed?}","jrails#{".min" if JRails.compressed?}"]
 end
-ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
 
 
 ActionView::Helpers::AssetTagHelper.module_eval do 
@@ -37,7 +36,7 @@ JAVASCRIPT
   end 
 
   def javascript_include_tag_with_jquery(*source)
-    if source.first == :defaults
+    if source.first == :jrails
       javascripts = []
       if JRails.google?
         javascripts \
