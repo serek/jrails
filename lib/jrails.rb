@@ -7,18 +7,18 @@ class JRails
   }
 
   def self.load_config
-    config_file = File.join(RAILS_ROOT, "config", "jrails.yml")
+    config_file = File.join(Rails.root, "config", "jrails.yml")
     if File.exist? config_file
       loaded_config = YAML.load_file(config_file) 
-      if loaded_config and loaded_config.key? RAILS_ENV
-        @@config.merge!(loaded_config[RAILS_ENV].symbolize_keys) 
+      if loaded_config and loaded_config.key? Rails.env
+        @@config.merge!(loaded_config[Rails.env].symbolize_keys) 
         if google?
           @@jquery_path   = "http://ajax.googleapis.com/ajax/libs/jquery/#{@@config[:jquery_version]}/jquery#{".min" if compressed?}.js"
           @@jqueryui_path = "http://ajax.googleapis.com/ajax/libs/jqueryui/#{@@config[:jqueryui_version]}/jquery-ui#{".min" if compressed?}.js"
           @@jqueryui_i18n_path = "http://ajax.googleapis.com/ajax/libs/jqueryui/#{@@config[:jqueryui_version]}/i18n/jquery-ui-i18n#{".min" if compressed?}.js"
         end
       else
-        raise Exception.new "Failed finding '#{RAILS_ENV}' environment in config. check your 'config/jrails.yml' or delete that file "
+        raise Exception.new "Failed finding '#{Rails.env}' environment in config. check your 'config/jrails.yml' or delete that file "
       end
     end
   end
